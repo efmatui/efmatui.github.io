@@ -1,0 +1,271 @@
+<html>
+<style>
+	button:hover, a:active {
+    background-color: red;
+}
+	h1.solid {
+		border-style: solid;
+		color: black;
+	}
+	input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+	button {
+    width: 20%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+	div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+	</style>
+<head>
+
+</head>
+<body>
+
+
+<div>
+<center><h1 class="solid">Register</h1></center>
+
+FirstName: <input type="text" id="fname">
+LastName: <input type="text" id="lname"><br/><br/>
+Address: <input type="text" id="address"> <br/><br/>
+Phone Number: 
+<input id="phonenum" type="text" value="">
+<br/><br/>
+Cell phone number: <input type="text" id="cellphone"><br/><br/>
+Birthday:<input type="date" id="bday" min="1900-01-01"><button type="buttonCalculate" onClick="CalculateInformation()">Caluculate</button><br/><br/>
+
+Zodiac Sign: <input type="text" id="ZoSign"><br/><br/>
+Zodiac Year: <input type="text" id="ZoYear"><br/><br/>
+Birth Day of Week:<input type="text" id="birthWeek"><br/><br/> 
+Citizenship number: <input type="text" id="CitiNumber"><br/><br/>
+
+
+
+
+<button type="button" onClick="SaveInformation()">Save</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<button type="button" onclick="deleteInformation()" value="Reset form" >Cancel</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<button type="button" onclick="SubmitInformation()">Submit</button>
+</div>
+
+<script>
+var setInfo = ["fname", "lname", "address","phonenum","cellphone","bday","Zosign","ZoYear","birthWeek","CitiNumber"];
+var day = ["Sunday", "Monday", "Tuesday","Wednesday","Thursday","Friday","Saturday"];
+window.onload = LoadInformation;
+function SubmitInformation(){
+	var fname = document.getElementById("fname").value;
+	var lname = document.getElementById("lname").value;
+	var address = document.getElementById("address").value;
+	var phonenum = document.getElementById("phonenum").value;
+	var cellphone = document.getElementById("cellphone").value;
+	var birthday = document.getElementById("bday").value;
+	var zodiacSign=document.getElementById("ZoSign").value;
+	var zodiacYear=document.getElementById("ZoYear").value;
+	var day=document.getElementById("birthWeek").value;
+	var CitiNumber = document.getElementById("CitiNumber").value;
+
+	if ((fname=="" || lname=="" || address=="" || phonenum=="" || cellphone=="" || birthday=="" || zodiacSign==""|| zodiacYear=="" || day=="" || CitiNumber=="")){
+		alert("กรอกข้อมูลให้ครบถ้วน");
+	}
+	else if (! /[a-zA-Z]/.test(fname) || ! /[a-zA-Z]/.test(lname) || /[ก-ฮ]/.test(fname) || /[ก-ฮ]/.test(lname)){
+		alert("กรอกชื่อเป็นภาษาอังกฤษ");
+	}
+	else if (phonenum.length!=9 || (! /[0-9]/.test(phonenum))){
+		alert("กรอกเบอร์โทรศัพท์ให้ถูกต้อง");
+	}
+	else if (cellphone.length!=10 || (! /[0-9]/.test(cellphone))){
+		alert("กรอกเบอร์มือถือให้ถูกต้อง");
+	}
+
+	else if (! /[0-9]/.test(CitiNumber) || CitiNumber.length!=13){
+		alert("กรอกเลขบัตรประชาชน13หลักให้ถูกต้อง");
+	}
+	
+	else{		
+	document.cookie = "FirstName:"+fname+","+"LastName:"+lname+","+"Address:"+address+","+"Phone Number:"+phonenum+","+"Cell phone number:"+cellphone+","+"Birthday:"+birthday+","+"Zodiac Sign:"+zodiacSign+","+"Zodiac Year:"+zodiacYear+","+"Birth Day of Week:"+day+","+"Citizenship number:"+CitiNumber;
+	alert(document.cookie)
+	location = "Fromtotal.html";
+	}
+}
+function SaveInformation() {
+    var fname = document.getElementById("fname").value;
+	var lname = document.getElementById("lname").value;
+	var address = document.getElementById("address").value;
+	var phonenum = document.getElementById("phonenum").value;
+	var cellphone = document.getElementById("cellphone").value;
+	var birthday = document.getElementById("bday").value;
+	var zodiacSign=document.getElementById("ZoSign").value;
+	var zodiacYear=document.getElementById("ZoYear").value;
+	var day=document.getElementById("birthWeek").value;
+	var CitiNumber = document.getElementById("CitiNumber").value;
+	document.cookie = "FirstName:"+fname+","+"LastName:"+lname+","+"Address:"+address+","+"Phone Number:"+phonenum+","+"Cell phone number:"+cellphone+","+"Birthday:"+birthday+","+"Zodiac Sign:"+zodiacSign+","+"Zodiac Year:"+zodiacYear+","+"Birth Day of Week:"+day+","+"Citizenship number:"+CitiNumber;
+	
+}
+function LoadInformation(){
+
+	var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(',');
+	for(var i = 0; i <ca.length; i++) {        
+		var info = ca[i].split(':');
+		if (info[0]=="FirstName"){
+			document.getElementById("fname").value=info[1];
+		}
+		else if (info[0]=="LastName"){
+			document.getElementById("lname").value=info[1];
+		}
+		else if (info[0]=="Address"){
+			document.getElementById("address").value=info[1];
+		}
+		else if (info[0]=="Phone Number"){
+			document.getElementById("phonenum").value=info[1];
+		}
+		else if (info[0]=="Cell phone number"){
+			document.getElementById("cellphone").value=info[1];
+		}
+		else if (info[0]=="Birthday"){
+			document.getElementById("bday").value=info[1];
+		}
+		else if (info[0]=="Zodiac Sign"){
+			document.getElementById("ZoSign").value=info[1];
+		}
+		else if (info[0]=="Zodiac Year"){
+			document.getElementById("ZoYear").value=info[1];
+		}
+		else if (info[0]=="Birth Day of Week"){
+			document.getElementById("birthWeek").value=info[1];
+		}
+		else if (info[0]=="Citizenship number"){
+			document.getElementById("CitiNumber").value=info[1];
+		}
+		
+	}
+}
+function deleteInformation(){
+	document.cookie = "FirstName:"+","+"LastName:"+","+"Address:"+","+"Phone Number:"+","+"Cell phone number:"+","+"Birthday:"+","+"Zodiac Sign:"+","+"Zodiac Year:"+","+"Birth Day of Week:"+","+"Citizenship number:";
+	document.getElementById("fname").value="";
+	document.getElementById("lname").value="";
+	document.getElementById("address").value="";
+	document.getElementById("phonenum").value="";
+	document.getElementById("cellphone").value="";
+	document.getElementById("bday").value="0000-00-00";
+	document.getElementById("ZoSign").value="";
+	document.getElementById("ZoYear").value=""
+	document.getElementById("birthWeek").value="";
+	document.getElementById("CitiNumber").value="";
+	
+}
+
+	
+function CalculateInformation(){
+	var birdthday = document.getElementById("bday").value;
+	var part=birdthday.split("-");
+	var zo=getZodiacSign(part[2],part[1]);
+	document.getElementById("ZoSign").value=zo;
+	var d = new Date(birdthday);
+	getDayOfBirthday(d.getDay());
+	x = (1901 - d.getFullYear()) % 12
+		if (x == 1 || x == -11) {var year = "Rat";}
+		if (x == 0) {var year = "Ox";}
+		if (x == 11 || x == -1) {var year = "Tiger";}
+		if (x == 10 || x == -2) {var year = "Rabbit";}
+		if (x == 9 || x == -3)  {var year = "Dragon";}
+		if (x == 8 || x == -4)  {var year ="Snake";}
+		if (x == 7 || x == -5)  {var year = "Horse";}
+		if (x == 6 || x == -6)  {var year = "Sheep";}
+		if (x == 5 || x == -7)  {var year = "Monkey";}
+		if (x == 4 || x == -8)  {var year = "Cock";}
+		if (x == 3 || x == -9)  {var year = "Dog";}
+		if (x == 2 || x == -10)  {var year = "Boar";}  
+document.getElementById("ZoYear").value=year;
+	
+}
+function getDayOfBirthday(dayOfBirth){
+	
+	if (dayOfBirth=="0"){
+		document.getElementById("birthWeek").value=day[0];
+	}
+	else if (dayOfBirth=="1"){
+		document.getElementById("birthWeek").value=day[1];
+	}
+	else if (dayOfBirth=="2"){
+		document.getElementById("birthWeek").value=day[2];
+	}
+	else if (dayOfBirth=="3"){
+		document.getElementById("birthWeek").value=day[3];
+	}
+	else if (dayOfBirth=="4"){
+		document.getElementById("birthWeek").value=day[4];
+	}
+	else if (dayOfBirth=="5"){
+		document.getElementById("birthWeek").value=day[5];
+	}
+	else if (dayOfBirth=="6"){
+		document.getElementById("birthWeek").value=day[6];
+	}
+}
+function getZodiacSign(day, month) {
+
+  var zodiacSigns = {
+    'capricorn':'Capricorn',
+    'aquarius':'Aquarius',
+    'pisces':'Pisces',
+    'aries':'Aries',
+    'taurus':'Taurus',
+    'gemini':'Gemini',
+    'cancer':'Cancer',
+    'leo':'Leo',
+    'virgo':'Virgo',
+    'libra':'Libra',
+    'scorpio':'Scorpio',
+    'sagittarius':'Sagittarius'
+  }
+
+  if((month == 1 && day <= 20) || (month == 12 && day >=22)) {
+    return zodiacSigns.capricorn;
+  } else if ((month == 1 && day >= 21) || (month == 2 && day <= 18)) {
+    return zodiacSigns.aquarius;
+  } else if((month == 2 && day >= 19) || (month == 3 && day <= 20)) {
+    return zodiacSigns.pisces;
+  } else if((month == 3 && day >= 21) || (month == 4 && day <= 20)) {
+    return zodiacSigns.aries;
+  } else if((month == 4 && day >= 21) || (month == 5 && day <= 20)) {
+    return zodiacSigns.taurus;
+  } else if((month == 5 && day >= 21) || (month == 6 && day <= 20)) {
+    return zodiacSigns.gemini;
+  } else if((month == 6 && day >= 22) || (month == 7 && day <= 22)) {
+    return zodiacSigns.cancer;
+  } else if((month == 7 && day >= 23) || (month == 8 && day <= 23)) {
+    return zodiacSigns.leo;
+  } else if((month == 8 && day >= 24) || (month == 9 && day <= 23)) {
+    return zodiacSigns.virgo;
+  } else if((month == 9 && day >= 24) || (month == 10 && day <= 23)) {
+    return zodiacSigns.libra;
+  } else if((month == 10 && day >= 24) || (month == 11 && day <= 22)) {
+    return zodiacSigns.scorpio;
+  } else if((month == 11 && day >= 23) || (month == 12 && day <= 21)) {
+    return zodiacSigns.sagittarius;
+  }
+}
+</script>
+
+
+
+
+
+</body>
+</html>
