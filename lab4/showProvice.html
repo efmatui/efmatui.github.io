@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+<style>
+	p{
+		font-size: 22px;
+		font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
+	}
+	.designfont{
+		text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+		color: Pink; 
+		font-family: 'Trocchi', serif; 
+		font-size: 45px; 
+		font-weight: normal; 
+		line-height: 48px; 
+		margin: 0;
+	}
+	body{
+		background: no-repeat center center fixed; 
+ 		 -webkit-background-size: cover;
+  		-moz-background-size: cover;
+		  -o-background-size: cover;
+  		background-size: cover;
+		
+	}
+	img.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+	}
+...
+</style>
+<link href="FontAnimation.css" rel="stylesheet" type="text/css">
+<meta charset="utf-8">
+<title>showProvice</title>
+</head>
+	
+<body>
+<center><h1 class="designfont animated rubberBand bounce">Slogan of Provice</h1></center>
+<center><p id="demo"></p></center>
+<img id="img1" class="displayed"   >
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		var decodedCookie = decodeURIComponent(document.cookie);
+		var formPart = decodedCookie.split(',');
+		var birthday=formPart[2].split(":");
+		var gender=formPart[3].split(":");
+		var year=birthday[1].split("-");
+
+		if (2017-year[0]<14){	
+			$("h1").css("color","lightblue");
+			$('p').css('textShadow','#6374AB 1px -1px 2px');
+    		$('body').css("background-image", "url(/bgn_child.jpg)");  
+		}
+		else if (gender[1]=="Male"){
+			$("h1").css("color","Black");
+			
+			$('p').css('textShadow','#EEE8AA 1px -1px 20px');
+			$('body').css("background-image", "url(/night.jpg)");  
+		}
+		else if (gender[1]=="Female"){
+			$("h1").css("color","Pink");
+			$('p').css('textShadow','#FF69B4 1px -1px 2px');
+			$('body').css("background-image", "url(/bgn_women.jpg)");  
+		}
+	});
+	
+	
+	
+  function processForm()
+  {
+	var decodedCookie = decodeURIComponent(document.cookie);
+	var formPart = decodedCookie.split(',');
+	var provice=formPart[4].split(":");
+	loadDoc(provice);
+  }
+  function loadDoc(provice) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML =
+      this.responseText;
+	  $("#img1").attr("src",provice[1]+".png")
+    }
+  };
+  xhttp.open("GET", provice[1]+".txt", true);
+  xhttp.send();
+}
+
+
+	
+processForm();
+</script>
+</body>
+</html>
