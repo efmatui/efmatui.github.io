@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<style>
+	body{
+		background-color: #f2f2f2;
+	}
+	h1.solid {
+		border-style: solid;
+		color: black;
+	}
+	div {
+    
+    padding: 10px;
+}
+	</style>
+<head>
+<meta charset="utf-8">
+<title>FormTotal</title>
+</head>
+
+<div><body><center><h1 class="solid">Information</h1>
+FirstName:<input type="text" label id="fname" disabled></label><br/><br/>
+LastName:<input type="text" label id="lname" disabled></label><br/><br/>
+Address:<input type="text" label id="address" disabled></label><br/><br/>
+Phone Number:<input type="text" label id="phonenum" disabled></label><br/><br/>
+Cell Phone Number:<input type="text" label id="cellphone" disabled></label><br/><br/>
+Birthday:<input type="text" label id="bday" disabled></label><br/><br/>
+Zodiac Sign:<input type="text" label id="ZoSign" disabled></label><br/><br/>
+Zodiac Year:<input type="text" label id="ZoYear" disabled></label><br/><br/>
+Birthday of Week:<input type="text" label id="birthWeek" disabled></label><br/><br/>
+Citizenship number:<input type="text" label id="CitiNumber" disabled></label><br/><br/>
+</center></div>
+<script>
+	
+	var setInfo = ["fname", "lname", "address","phonenum","cellphone","bday","Zosign","ZoYear","birthWeek","CitiNumber"];
+	var decodedCookie = decodeURIComponent(document.cookie);
+	var ca = decodedCookie.split(',');	
+	for(var i = 0; i <ca.length; i++) {        
+		var info = ca[i].split(':');
+		
+		if (info[0]=="FirstName"){
+
+			document.getElementById("fname").value=info[1];
+		}
+		else if (info[0]=="LastName"){
+			document.getElementById("lname").value=info[1];
+		}
+		else if (info[0]=="Address"){
+			document.getElementById("address").value=info[1];
+		}
+		else if (info[0]=="Phone Number"){
+			document.getElementById("phonenum").value=info[1];
+		}
+		else if (info[0]=="Cell phone number"){
+			document.getElementById("cellphone").value=info[1];
+		}
+		else if (info[0]=="Birthday"){
+			document.getElementById("bday").value=info[1];
+		}
+		else if (info[0]=="Zodiac Sign"){
+			document.getElementById("ZoSign").value=info[1];
+		}
+		else if (info[0]=="Zodiac Year"){
+			document.getElementById("ZoYear").value=info[1];
+		}
+		else if (info[0]=="Birth Day of Week"){
+			document.getElementById("birthWeek").value=info[1];
+		}
+		else if (info[0]=="Citizenship number"){
+			document.getElementById("CitiNumber").value=info[1];
+		}
+		
+	}
+	document.cookie = "FirstName:"+","+"LastName:"+","+"Address:"+","+"Phone Number:"+","+"Cell phone number:"+","+"Birthday:"+","+"Zodiac Sign:"+","+"Zodiac Year:"+","+"Birth Day of Week:"+","+"Citizenship number:";
+	
+	
+	
+</script>
+</body>
+</html>
